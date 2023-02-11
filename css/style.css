@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+html {
+    background: #fff;
+}
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #363636;
+}
+
+.container {
+    width: 1140px;
+    margin: auto;
+}
+
+#configurator {
+    padding: 50px 0;
+}
+.title {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+.configurator_construct {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 70px;
+}
+.configurator_construct>div {
+    width: calc(50% - 35px);
+}
+.configurator_construct_wrapper {
+    display: flex;
+    gap: 30px;
+}
+.configurator_construct_item {
+    width: calc(50% - 15px);
+}
+.door_color {
+    width: 100%;
+    height: 70vh;
+    background: #c9c9c9;
+    padding: 25px;
+}
+.door_skin {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: left;
+}
+.door_skin.inside{
+    justify-content: right;
+}
+.door_knob {
+    width: 45px;
+    height: 20px;
+}
+.configurator_construct_desc h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.options_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options_item:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.options_popup {
+    display: none;
+}
+
+.options_popup.open {
+    display: block;
+}
+
+.options_popup.open .overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.78);
+    z-index: 2;
+}
+
+.options_popup_wrapper{
+    position: fixed;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+    box-shadow: 1px 1px 15px -8px rgba(59, 59, 59, 0.75);
+    -webkit-box-shadow: 1px 1px 15px -8px rgba(59, 59, 59, 0.75);
+    border-radius: 30px;
+    padding: 30px;
+    gap: 10px 30px;
+    flex-wrap: wrap;
+    z-index: 3;
+    display: flex;
+}
+
+.options_popup label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    width: calc(50% - 15px);
+}
+
+.options_popup label input {
+    position: absolute;
+    left: -9999px;
+}
+
+.options_popup label input:checked + span {
+    background-color: #d4d4d4;
+}
+
+.options_popup label input:checked + span:before {
+    box-shadow: inset 0 0 0 7px #323232;
+}
+
+.options_popup label span {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50px;
+    transition: 0.25s ease;
+}
+
+.options_popup label span:hover {
+    background-color: #eee;
+}
+
+.options_popup label span:before {
+    display: flex;
+    flex-shrink: 0;
+    content: "";
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+    transition: 0.25s ease;
+    box-shadow: inset 0 0 0 3px #323232;
+}
+
+.squareColor {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.options_select {
+    width: 70%;
+    position: relative;
+    display: flex;
+    justify-content: right;
+}
+
+.options_select .options_list {
+    display: none;
+}
+
+.options_select .options_list.open {
+    display: block;
+    z-index: 1;
+}
+
+.options_select .options_list ul {
+    width: 55%;
+    right: 0;
+    top: 30px;
+}
+
+.options_select ul {
+    width: 100%;
+    background: #e6e6e6;
+    position: absolute;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 10px 10px;
+}
+
+.options_select li {
+    margin: 0;
+    padding: 4px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.options_select li:first-child {
+	padding-top: 0;
+}
+
+.options_select li:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.options_select input[type=radio] {
+    counter-increment: radios;
+    appearance: none;
+    display: none;
+    position: relative;
+    z-index: -1;
+}
+
+.options_select input[type=radio]:checked {
+    display: inline;
+    --display: block;
+}
+
+.options_select input[type=radio]:after {
+	content: attr(title);
+	display: inline;
+	font-size: 1rem;
+}
+
+.options_select ul.list {
+	counter-reset: labels;
+}
+
+.options_select label {
+    width: 100%;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.options_select label span {
+	display: none;
+	width: 1rem;
+	height: 1rem;
+	border: 1px solid #727272;
+	border-radius: 3px;
+}
+
+.options_value {
+    width: 65%;
+    display: flex;
+    justify-content: right;
+}
+
+.options_btn {
+    text-align: right;
+    cursor: pointer;
+}
+
+.cross_popup {
+    font-size: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.total_price, .sendForm  {
+    display: none;
+}
+
+.total_price {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    margin-top: 30px;
+}
+.total_price_title, .total_price_value {
+    font-size: 22px;
+    font-weight: 600;
+}
+#sendForm_btn {
+    background: #151617;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.sendForm {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.send_info {
+    display: none;
+    width: 100%;
+    text-align: right;
+    margin-top: 20px;
+}
+
+@media (max-width:1199px) {
+    .container {
+        width: 960px;
+    }
+}
+
+@media (max-width:991px) {
+    .container {
+        width: 720px;
+    }
+    .configurator_construct>div {
+        width: 100% !important;
+    }
+    
+    .door_color {
+        height: 50vh;
+    }
+    .options_popup_wrapper {
+        width: 90%;
+        max-height: 80%;
+        overflow-y: auto;
+    }
+    
+    .options_popup label {
+        width: 100%;
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        width: 540px;
+    }
+}
+
+@media (max-width:576px) {
+    .container {
+        width: 95%;
+    }
+}
