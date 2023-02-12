@@ -2,10 +2,8 @@
 require_once("../etc/config.php");
 require_once(APP_ROOT."/Class/queryAPI.php");
 require_once(APP_ROOT."/Class/telegram.php");
-// require_once(APP_ROOT."/Class/createPDF.php");
 $query = new Query();
 $telegram = new Telegram();
-// $PDF = new PDF();
 $values = array();
 parse_str($_POST['form'], $values);
 
@@ -18,20 +16,6 @@ $form_options_type = $values["form_options_type"];
 $form_accessories = $values["form_accessories"];
 $pdf = $_POST["pdf"];
 
-base64_decode($pdf);
-
-$date = date("Y-m-d(H:i:s)");
-$path_pdf = "../etc/files/door_".$date.".pdf";
-
-file_put_contents($path_pdf,base64_decode($pdf));
-
-// $form_color_painting = 'синий';
-// $form_color_skin = 'желтый';
-// $form_color_knob = 'зеленый';
-// $form_options_width = '940 мм';
-// $form_options_height = '2220 мм';
-// $form_options_type = 'Правое';
-// $form_accessories = 'Подсветка ручек, Регулируемые петли, Стучало "Лев"';
 $array_form_accessories = explode(", ", $form_accessories);
 
 if($form_options_type == 'Левое'){
@@ -130,14 +114,24 @@ foreach($array_form_accessories as $value){
         }
     }
 }
-//echo a .'+'.$skinPrice .'+'. $knobPrice .'+'. $widthPrice .'+'. $heightPrice .'+'. $typePrice .'+'. $accessoriesPrice .'<br>';
-echo $totalPrice = $paintingPrice + $skinPrice + $knobPrice + $widthPrice + $heightPrice + $typePrice + $accessoriesPrice;
+
+$totalPrice = $paintingPrice + $skinPrice + $knobPrice + $widthPrice + $heightPrice + $typePrice + $accessoriesPrice;
+
+$get_file = $query->get_file_db($paintingId, $skinId, $knobId, $widthId, $heightId, $typeId, $accessoriesIds, $totalPrice);
+if($get_file->num_rows > 0){
+    while ($item = $get_file->fetch_assoc()) {
+        echo $path_pdf = $item["pdf_href"];
+    }
+}
+else{
+    base64_decode($pdf);
+    $date = date("Y-m-d(H:i:s)");
+    $path_pdf = "../etc/files/door_".$date.".pdf";
+    file_put_contents($path_pdf,base64_decode($pdf));
+    
+    $query->insert_variation($paintingId, $skinId, $knobId, $widthId, $heightId, $typeId, $accessoriesIds, $totalPrice, $path_pdf);
+}
 
 $telegram->send_to_telegram($path_pdf);
-
-// echo $PDF->createPDF($colorPainting, $colorSkin, $colorKnob, $justify, $justify_inside, $form_color_painting, $form_color_skin, $form_color_knob, $form_options_width, $form_options_height, $form_options_type, $form_accessories, $totalPrice);
-//echo $totalPrice;
-
-$query->insert_variation($paintingId, $skinId, $knobId, $widthId, $heightId, $typeId, $accessoriesIds, $totalPrice, $path_pdf);
 
 ?>

@@ -117,5 +117,14 @@ class Query extends Database {
 			return $conn->errno;
 		}
 	}
+	
+	public function get_file_db($ColorPainting_id = 0, $ColorSkin_id = 0, $ColorKnob_id = 0, $Width_id = 0, $Height_id = 0, $type_id=  0, $accessories_ids= "", $total_price= 0){
+	    $conn = $this->conn_db();
+		$conn->set_charset('utf8mb4');
+		$query = $conn->prepare("SELECT `pdf_href` FROM `variationTable` WHERE (`ColorPainting_id` = '".intval($ColorPainting_id)."' AND `ColorSkin_id` = '".intval($ColorSkin_id)."' AND `ColorKnob_id` = '".intval($ColorKnob_id)."' AND `Width_id` = '".intval($Width_id)."' AND `Height_id` = '".intval($Height_id)."' AND `type_id` = '".intval($type_id)."' AND `accessories_ids` LIKE '".$accessories_ids."' AND `total_price` = '".intval($total_price)."');");
+		$query->execute();			
+		$result = $query->get_result();		
+		return $result;
+	}
 }
 ?>
