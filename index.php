@@ -67,7 +67,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <label>
-                                                        <input type="radio" name="color_painting" id="color_painting_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_price="<?=$item["price"]?>" />
+                                                        <input type="radio" name="color_painting" id="color_painting_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>" />
                                                         <span><div class="squareColor" style="background: <?=$item["code"]?>;"></div><?=$item["name"]?></span>
                                                     </label>
                                                     <?
@@ -94,7 +94,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <label>
-                                                        <input type="radio" name="color_skin" id="color_skin_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_price="<?=$item["price"]?>" />
+                                                        <input type="radio" name="color_skin" id="color_skin_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>" />
                                                         <span><div class="squareColor" style="background: <?=$item["code"]?>;"></div><?=$item["name"]?></span>
                                                     </label>
                                                     <?
@@ -122,7 +122,7 @@ $query = new Query();
                                                     ?>
                                                     <label>
                                                         
-                                                        <input type="radio" name="color_knob" id="color_knob_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_price="<?=$item["price"]?>" />
+                                                        <input type="radio" name="color_knob" id="color_knob_<?=$item["id"]?>" attr_color="<?=$item["code"]?>" attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>" />
                                                         <span><div class="squareColor" style="background: <?=$item["code"]?>;"></div><?=$item["name"]?></span>
                                                     </label>
                                                     <?
@@ -147,7 +147,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <li>
-                                                        <span attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
+                                                        <span attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
                                                     </li>
                                                     <? 
                                                 }
@@ -171,7 +171,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <li>
-                                                        <span attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
+                                                        <span attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
                                                     </li>
                                                     <? 
                                                 }
@@ -195,7 +195,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <li>
-                                                        <span attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
+                                                        <span attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>"><?=$item["name"]?></span>
                                                     </li>
                                                     <? 
                                                 }
@@ -221,7 +221,7 @@ $query = new Query();
                                                 while ($item = $result->fetch_assoc()) {
                                                     ?>
                                                     <label>
-                                                        <input type="checkbox" name="accessories" id="accessories_<?=$item["id"]?>" attr_price="<?=$item["price"]?>" />
+                                                        <input type="checkbox" name="accessories" id="accessories_<?=$item["id"]?>" attr_id="<?=$item["id"]?>" attr_price="<?=$item["price"]?>" />
                                                         <span><?=$item["name"]?></span>
                                                     </label>
                                                     <?
@@ -254,9 +254,7 @@ $query = new Query();
         </div>
     </section>
     <script   src="https://code.jquery.com/jquery-3.6.1.min.js"   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/script.js"></script>
     <script src="js/form.js"></script>
 </body>
